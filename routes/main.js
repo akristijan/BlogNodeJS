@@ -5,7 +5,16 @@ const router = express.Router();
 
 //Main routes - simplified for now
 router.get('/', (req, res) => {
-    res.send("Hello ratnice")
+    const locals = {
+        title:"Zmaj Node",
+        description: "Bice iz gospodara prstenova"
+        
+    }
+    res.render("index", locals)
+})
+
+router.get('/about', (req, res) => {
+    res.render('about')
 })
 
 
