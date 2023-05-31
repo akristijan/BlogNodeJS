@@ -9,7 +9,12 @@
     <script type="text/javascript" defer src="/js/script.js"></script>
 </head>
 <body>
-    <%= locals.description %>
-    <%- body %>
+    <%- include('../partials/search.ejs') %>
+    <div class="container">
+        <%- include('../partials/header.ejs') %>
+        <%- body %>
+        <%- include('../partials/footer.ejs') %>
+    </div>
+    
 </body>
 </html>
