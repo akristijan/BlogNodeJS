@@ -7,14 +7,22 @@
 <img src="/img/person_looking.jpg" alt="person looking out through window" class="hero-image">
 
 <section class="articles">
-    <h2 class="articles_heading">Latest Posts</h2>
-
-    <ul class="list-articles">
-       <li>
-            <span>Post title</span>
-            <span>Date</span>
-       </li>
-    </ul>
+    <h2 class="articles__heading">Latest Posts</h2>
+    
+        <ul class="article-ul">
+            <% posts.forEach( post => { %>
+                <li>
+                    <a href="/post/<%= post._id %>">
+                        <span><%=  post.title %></span>
+                        <span class="article-list__date"><%= post.createdAt.toLocaleDateString() %></span>
+                    </a>    
+                </li>
+            <% }) %>
+         </ul>
+   
+         <% if (nextPage !== null) { %>
+            <a href="/?page=<%= nextPage %>" class="pagination">&lt; View Older Posts</a>
+          <% } %>
 
    
 </section>

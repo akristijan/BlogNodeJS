@@ -3,14 +3,20 @@ require("dotenv").config({ path: "./config/.env" });
 
 const express = require('express');
 const app = express();
+const connectDB = require("./config/database");
 const expressLayout = require('express-ejs-layouts')
 const mainRoutes = require("./routes/main");
 
+//Connect To Database
+connectDB();
 
+//Static Folder
 app.use(express.static('public'));
+
 //Templating Engine 
 app.use(expressLayout);
 app.set('layout', './layouts/main');
+//Using EJS for views
 app.set('view engine', 'ejs');
 
 //Setup Routes For Which The Server Is Listening
