@@ -23,6 +23,7 @@ app.set('view engine', 'ejs');
 
 //Setup Routes For Which The Server Is Listening
 app.use("/", mainRoutes);
+app.use("/admin", adminRoutes)
 
 //Server running 
 app.listen(process.env.PORT, () => {
