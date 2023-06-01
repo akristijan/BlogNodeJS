@@ -1,6 +1,7 @@
 const Post = require('../models/Post');
 
 module.exports = {
+
     getPosts : async (req, res) => {
         try {
             
@@ -45,5 +46,26 @@ module.exports = {
             console.log(error)
         }
         
+    },
+
+    searchByTerm : async (req, res) => {
+        
+        
+        try {
+            let searchTerm = req.body.searchTerm;
+            const noSpecialCharacters = searchTerm.replace(/[^a-zA-Z0-9 ]/g, '');
+            const data = await Post.find({
+                $or: [
+                    {title : {$regex: new RegExp(noSpecialCharacters, 'i')}},
+                    {body : {$regex: new RegExp(noSpecialCharacters, 'i')}},
+
+                ]   
+            });
+            
+            res.render('search', {data})
+        } catch (error) {
+            console.log(error)
+        }
     }
+
 }

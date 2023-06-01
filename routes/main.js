@@ -7,7 +7,7 @@ const postsController = require("../controllers/posts")
 //Main routes - simplified for now
 router.get('/', postsController.getPosts);
 router.get('/post/:id', postsController.getPostById);
-
+router.post('/search',postsController.searchByTerm);
 router.get('/about', (req, res) => {
     res.render('about')
 })

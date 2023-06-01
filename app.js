@@ -12,7 +12,9 @@ connectDB();
 
 //Static Folder
 app.use(express.static('public'));
-
+//Body Parsing
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 //Templating Engine 
 app.use(expressLayout);
 app.set('layout', './layouts/main');
