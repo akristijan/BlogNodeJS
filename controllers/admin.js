@@ -1,5 +1,6 @@
 const User = require('../models/User');
-const adminLayout = '../views/layouts/admin'
+const Post = require('../models/Post');
+const adminLayout = '../views/layouts/admin';
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const jwtSecret = process.env.JWT_SECRET;
@@ -34,7 +35,13 @@ module.exports = {
     },
 
     getDashboard:  async (req, res) => {
-        res.render('admin/dashboard');
+        try {
+            const data = await Post.find();
+            res.render('admin/dashboard', { data })
+
+        } catch (error) {
+            console.log(error)
+        }
     },
 
     registerUser: async (req, res) => {
@@ -81,5 +88,30 @@ module.exports = {
         catch( err) {
             console.log(err)
         }
-    }
+    },
+
+    addPost: async (req, res) => {
+        try {
+            
+            res.render("admin/add-post", { layout: adminLayout });
+
+        } catch (error) {
+            
+        }
+    },
+
+    createPost: async (req, res) => {
+
+        try {    
+                const {title, body} = req.body;
+                const newPost = await Post.create( { title, body } );
+                console.log("Post has been added!");
+                res.redirect('/admin/dashboard')
+        }
+
+        catch( err) {
+            console.log(err)
+        }
+    },
+
 }
