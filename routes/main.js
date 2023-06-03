@@ -8,33 +8,8 @@ const postsController = require("../controllers/posts")
 router.get('/', postsController.getPosts);
 router.get('/post/:id', postsController.getPostById);
 router.post('/search',postsController.searchByTerm);
-router.get('/about', (req, res) => {
-    res.render('about')
-})
-
-router.get('/contact', (req, res) => {
-    res.render('contact')
-})
+router.get('/about', postsController.getAbout)
+router.get('/contact', postsController.getContact)
 
 
-/* function insertPostData() {
-    Post.insertMany([
-        {
-            title:"Vuk samotnjak",
-            body: "Learn how to live without food and water"
-
-        },
-        {
-            title:"Deployment od NodeJS application",
-            body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore "
-        },
-        {
-            title: "Understand how to work with MongoDB and Mongoose",
-            body: "Malesuada bibendum arcu vitae elementum curabitur vitae nunc. Fermentum posuere urna nec tincidunt praesent semper feugiat."
-
-        }
-    ])
-}
-
-insertPostData() */
 module.exports = router;

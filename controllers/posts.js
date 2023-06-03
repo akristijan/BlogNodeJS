@@ -26,16 +26,6 @@ module.exports = {
         } catch (error) {
             console.log(error)
         }
-        
-
-
-    /*     try {
-            const posts = await Post.find();
-            res.render('index', { posts: posts })
-
-        } catch (error) {
-            console.log(error)
-        } */
     },
 
     getPostById: async (req, res) => {
@@ -63,6 +53,22 @@ module.exports = {
             });
             
             res.render('search', {data})
+        } catch (error) {
+            console.log(error)
+        }
+    },
+
+    getAbout: async (req, res) => {
+        try {
+            res.render('about')
+        } catch (error) {
+            console.log(error)
+        }
+    },
+
+    getContact: async (req, res) => {
+        try {
+            res.render('contact')
         } catch (error) {
             console.log(error)
         }

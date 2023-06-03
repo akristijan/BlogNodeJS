@@ -1,19 +1,19 @@
-<a href="/dashboard">&larr; Back</a>
+<a href="/admin/dashboard">&larr; Back</a>
 <div class="admin-title">
   <h2>Edit Post</h2>
-  <form action="/delete-post/<%= data._id %>?_method=DELETE" method="POST">
+  <form action="/admin/delete-post/<%= data._id %>?_method=DELETE" method="POST">
     <input type="submit" value="DELETE" class="btn-delete btn">
-</form>
+  </form>
 </div>
 
-<form action="/admin/edit-post/<%= data._id %>" method="POST">
+<form action="/admin/edit-post/<%= data._id %>?_method=PUT" method="POST">
 
   <label for="title"><b>Title</b></label>
-  <input type="text" placeholder="Post Title" name="title">
+  <input type="text" placeholder="Post Title" name="title" value="<%= data.title %>">
 
   <label for="body"><b>Content</b></label>
-  <textarea name="body" cols="50" rows="10"></textarea>
+  <textarea name="body" cols="50" rows="10" ><%= data.body %></textarea>
 
-  <input type="submit" value="Add" class="btn">
+  <input type="submit" value="Update" class="btn">
 
 </form>

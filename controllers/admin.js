@@ -37,7 +37,7 @@ module.exports = {
     getDashboard:  async (req, res) => {
         try {
             const data = await Post.find();
-            res.render('admin/dashboard', { data })
+            res.render('admin/dashboard', { data, layout: adminLayout })
 
         } catch (error) {
             console.log(error)
@@ -113,5 +113,60 @@ module.exports = {
             console.log(err)
         }
     },
+
+    // GET POST 
+    //Update Post 
+    getPost: async (req, res) => {
+
+        try {    
+            const post = await Post.findById(req.params.id);
+            console.log(post)
+            res.render('admin/edit-post', {data: post, layout: adminLayout})
+        }
+        catch( err) {
+            console.log(err)
+        }
+    },
+
+    //Update Post 
+    updatePost: async (req, res) => {
+
+        try {    
+            await Post.findByIdAndUpdate(req.params.id, {
+                title: req.body.title,
+                body: req.body.body,
+                updatedAt: Date.now()
+            })
+
+            res.redirect(`/admin/edit-post/${req.params.id}`)
+        }
+
+        catch( err) {
+            console.log(err)
+        }
+    },
+    // Delete Post 
+    deletePost: async (req, res) => {
+
+        try {    
+                // Find post by id
+                let post = await Post.findById({ _id: req.params.id });
+               
+                // Delete post from db
+                await Post.findByIdAndDelete(post._id );
+                console.log("Deleted Post");
+                res.redirect('/admin/dashboard')
+        }
+
+        catch( err) {
+            console.log(err)
+        }
+    },
+
+    getLogout:  (req, res) => {
+        res.clearCookie('token');
+        //res.json({ message: "Logout successful."})
+        res.redirect('/')
+    }
 
 }

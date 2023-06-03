@@ -4,6 +4,7 @@ require("dotenv").config({ path: "./config/.env" });
 const express = require('express');
 const app = express();
 const connectDB = require("./config/database");
+const methodOverride = require("method-override");
 const session = require("express-session");
 const flash = require("express-flash");
 const expressLayout = require('express-ejs-layouts')
@@ -11,6 +12,7 @@ const mainRoutes = require("./routes/main");
 const adminRoutes = require("./routes/admin");
 const cookieParser = require('cookie-parser')
 const MongoStore = require("connect-mongo");
+const isActiveRoute = require('./helpers/routHelpers');
 
 //Connect To Database
 connectDB();
@@ -23,6 +25,9 @@ app.use(express.json());
 app.use(cookieParser());
 //Use flash messages for errors, info, ect...
 app.use(flash());
+
+//Use forms for put / delete
+app.use(methodOverride("_method"));
 
 // Setup Sessions - stored in MongoDB
 app.use(
